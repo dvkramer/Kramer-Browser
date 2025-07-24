@@ -1,0 +1,34 @@
+From bf49bedee530631a51546250b0da1b3dd8ffaec1 Mon Sep 17 00:00:00 2001
+From: Derpy153 <derpy153@gmail.com>
+Date: Thu, 24 Jul 2025 10:12:07 -0400
+Subject: [PATCH] Rebrand
+
+---
+ chrome/app/theme/chromium/BRANDING | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/chrome/app/theme/chromium/BRANDING b/chrome/app/theme/chromium/BRANDING
+index f8363d5b29..4d99e8361d 100644
+--- a/chrome/app/theme/chromium/BRANDING
++++ b/chrome/app/theme/chromium/BRANDING
+@@ -1,10 +1,10 @@
+-COMPANY_FULLNAME=The Chromium Authors
+-COMPANY_SHORTNAME=The Chromium Authors
+-PRODUCT_FULLNAME=Chromium
+-PRODUCT_SHORTNAME=Chromium
+-PRODUCT_INSTALLER_FULLNAME=Chromium Installer
+-PRODUCT_INSTALLER_SHORTNAME=Chromium Installer
+-COPYRIGHT=Copyright @LASTCHANGE_YEAR@ The Chromium Authors. All rights reserved.
++COMPANY_FULLNAME=Kramer Intelligence
++COMPANY_SHORTNAME=Kramer Intelligence
++PRODUCT_FULLNAME=Kramer Browser
++PRODUCT_SHORTNAME=Kramer Browser
++PRODUCT_INSTALLER_FULLNAME=Kramer Browser Installer
++PRODUCT_INSTALLER_SHORTNAME=Kramer Browser Installer
++COPYRIGHT=Copyright @LASTCHANGE_YEAR@ Kramer Intelligence. All rights reserved.
+ MAC_BUNDLE_ID=org.chromium.Chromium
+ MAC_CREATOR_CODE=Cr24
+ MAC_TEAM_ID=
+-- 
+2.42.0.windows.2
+
