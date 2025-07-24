@@ -1,10 +1,19 @@
 @echo off
 echo =======================================================
 echo         KRAMER BROWSER UPDATE AND BUILD SCRIPT
+echo          (Portable - Location Aware Version)
 echo =======================================================
 
-:: Navigate to the source directory
-cd C:\Chromium\src
+:: Place these files in chromium/src/patches
+:: %~dp0 is a special variable that means "The Drive and Path of this script".
+:: So, we first change the directory to wherever the script is running from.
+:: The /d switch handles cases where the script might be on a different drive.
+cd /d "%~dp0"
+
+:: Since the script is in the "patches" folder, we go up one level to get to "src".
+cd ..
+
+echo Now running from: %cd%
 
 :: --- STEP 1: Update Chromium to the latest version ---
 echo.
@@ -21,8 +30,8 @@ if errorlevel 1 (
 echo.
 echo [2/4] Applying Kramer Browser patches...
 :: --- STEP 2: Apply all patches from your patches folder ---
-:: This loop finds every file ending in .patch in your folder and applies it.
-for %%f in ("C:\Chromium\src\patches\*.patch") do (
+:: Now the script just looks for patches in its own folder.
+for %%f in ("%~dp0*.patch") do (
     echo Applying patch: %%~nxf
     git apply --reject "%%f"
     if errorlevel 1 (
@@ -30,8 +39,7 @@ for %%f in ("C:\Chromium\src\patches\*.patch") do (
         echo ***************************************************************
         echo CRITICAL ERROR: Patch "%%~nxf" failed to apply.
         echo This usually means the underlying Chromium code has changed.
-        echo You will need to remake this patch.
-        echo See the .rej files to see what failed.
+        echo You will need to remake this patch. See the .rej files.
         echo ***************************************************************
         goto :eof
     )
