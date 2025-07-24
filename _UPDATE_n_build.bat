@@ -18,7 +18,7 @@ echo Now running from: %cd%
 :: --- STEP 1: Update Chromium to the latest version ---
 echo.
 echo [1/4] Updating Chromium source code...
-gclient sync -D --no-history --shallow
+gclient sync -D --no-history
 git rebase-update
 
 :: Check if the update was successful before proceeding
