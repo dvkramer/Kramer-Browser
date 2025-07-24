@@ -19,7 +19,7 @@ echo Now running from: %cd%
 echo.
 echo [1/4] Updating Chromium source code...
 git rebase-update
-gclient sync -D --no-history --shallow
+gclient sync -D --no-history --shallow --jobs=10
 
 :: Check if the update was successful before proceeding
 if errorlevel 1 (
