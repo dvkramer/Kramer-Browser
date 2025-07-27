@@ -15,6 +15,10 @@ Kramer Browser is a lightweight browser built on Chromium.
 
 Download the installer from [Releases](../../releases).
 
+## Notice
+
+Kramer Browser currently does not auto-update. If this feature is added in the future, you will still have to download a new installer to get it.
+
 ## License
 
 Kramer Browser inherits the [Chromium open source license (BSD-3-Clause)](https://chromium.googlesource.com/chromium/src/+/main/LICENSE).
