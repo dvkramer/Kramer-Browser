@@ -13,7 +13,7 @@ Kramer Browser is a lightweight browser built on Chromium.
 
 ## Install
 
-Installer is available on the [Releases](../../releases) page.
+Download the installer from [Releases](../../releases).
 
 ## License
 
