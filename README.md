@@ -2,8 +2,7 @@
 
 Kramer Browser is a lightweight browser built on Chromium.
 
-<img width="512" height="512" alt="github kramer" src="https://github.com/user-attachments/assets/96901864-0751-41dc-adf6-53c79572678a" />
-
+<img width="512" height="512" alt="github kbrowser" src="https://github.com/user-attachments/assets/c58b8741-dbd3-4bc5-83f9-935dc25df236" />
 
 ## Features
 
