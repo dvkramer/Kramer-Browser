@@ -58,7 +58,7 @@ namespace WebView2Browser
             try
             {
                 await webView.EnsureCoreWebView2Async();
-
+                
                 // Set up event handlers
                 webView.NavigationStarting += (s, e) => WebView_NavigationStarting(s, e, tab);
                 webView.NavigationCompleted += (s, e) => WebView_NavigationCompleted(s, e, tab);
@@ -69,7 +69,7 @@ namespace WebView2Browser
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error initializing WebView2: {ex.Message}", "Error",
+                MessageBox.Show($"Error initializing WebView2: {ex.Message}", "Error", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -80,7 +80,7 @@ namespace WebView2Browser
         private void WebView_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e, BrowserTab tab)
         {
             if (tab.IsDisposed || tab != currentTab) return;
-
+            
             try
             {
                 UrlTextBox.Text = e.Uri;
@@ -95,7 +95,7 @@ namespace WebView2Browser
         private void WebView_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e, BrowserTab tab)
         {
             if (tab.IsDisposed) return;
-
+            
             try
             {
                 UpdateNavigationButtons();
@@ -109,15 +109,15 @@ namespace WebView2Browser
         private void WebView_DocumentTitleChanged(object? sender, object e, BrowserTab tab)
         {
             if (tab.IsDisposed) return;
-
+            
             try
             {
                 if (tab.WebView?.CoreWebView2 != null)
                 {
                     var title = tab.WebView.CoreWebView2.DocumentTitle;
-                    var displayTitle = string.IsNullOrEmpty(title) ? "New Tab" :
+                    var displayTitle = string.IsNullOrEmpty(title) ? "New Tab" : 
                         (title.Length > 20 ? title.Substring(0, 20) + "..." : title);
-
+                    
                     Dispatcher.Invoke(() =>
                     {
                         if (!tab.IsDisposed && tab.TabButton != null)
@@ -136,7 +136,7 @@ namespace WebView2Browser
         private void SwitchToTab(BrowserTab tab)
         {
             if (tab.IsDisposed) return;
-
+            
             try
             {
                 // Hide all webviews
@@ -192,7 +192,7 @@ namespace WebView2Browser
             {
                 // Mark tab as disposed to prevent further event handling
                 tab.IsDisposed = true;
-
+                
                 // Switch to another tab first if this was current
                 if (currentTab == tab)
                 {
@@ -207,7 +207,7 @@ namespace WebView2Browser
                 // Remove from UI
                 TabPanel.Children.Remove(tab.TabButton);
                 WebViewContainer.Children.Remove(tab.WebView);
-
+                
                 // Dispose WebView safely
                 if (tab.WebView != null)
                 {
@@ -266,7 +266,7 @@ namespace WebView2Browser
                         else
                             url = "https://" + url;
                     }
-
+                    
                     currentTab.WebView.CoreWebView2.Navigate(url);
                 }
             }
@@ -313,7 +313,7 @@ namespace WebView2Browser
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             // Placeholder for menu functionality
-            MessageBox.Show("Menu functionality coming soon!", "Menu",
+            MessageBox.Show("Menu functionality coming soon!", "Menu", 
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

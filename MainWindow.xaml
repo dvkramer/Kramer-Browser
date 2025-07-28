@@ -94,7 +94,7 @@
         </Style>
 
         <!-- URL TextBox Style (Rounded) -->
-        <Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
+<Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="#3c3c3c"/>
             <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -102,20 +102,24 @@
             <Setter Property="Padding" Value="10,8"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" 
+                                CornerRadius="20" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="20">
+                                SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="PART_ContentHost" 
-                                        Margin="{TemplateBinding Padding}"
-                                        VerticalAlignment="Center"/>
+                                          Focusable="false" 
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="#0078d4"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#0078d4" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
