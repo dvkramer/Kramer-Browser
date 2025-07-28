@@ -6,8 +6,9 @@
         Title="Modern WebView2 Browser" Height="800" Width="1200"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Background="#1e1e1e">
-    
+        Background="#1e1e1e"
+        WindowStyle="None" AllowsTransparency="True" Name="ModernBrowserWindow">
+
     <Window.Resources>
         <!-- Modern Button Style -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
@@ -22,10 +23,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="4" 
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="4"
                                 BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" 
+                            <ContentPresenter HorizontalAlignment="Center"
                                             VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -55,22 +56,22 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="8,8,0,0" 
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8,8,0,0"
                                 BorderThickness="0">
                             <Grid>
-                                <TextBlock Text="{TemplateBinding Content}" 
-                                         HorizontalAlignment="Left" 
+                                <TextBlock Text="{TemplateBinding Content}"
+                                         HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
                                          Margin="8,0,25,0"
                                          TextTrimming="CharacterEllipsis"/>
-                                <Button Name="CloseButton" 
-                                       Content="×" 
-                                       HorizontalAlignment="Right" 
+                                <Button Name="CloseButton"
+                                       Content="×"
+                                       HorizontalAlignment="Right"
                                        VerticalAlignment="Center"
-                                       Width="20" Height="20" 
+                                       Width="20" Height="20"
                                        Margin="0,0,5,0"
-                                       Background="Transparent" 
+                                       Background="Transparent"
                                        Foreground="#ffffff"
                                        BorderThickness="0"
                                        FontSize="14"
@@ -93,8 +94,35 @@
             <Setter Property="Background" Value="#0078d4"/>
         </Style>
 
+        <!-- Title Bar Button Style -->
+        <Style x:Key="TitleBarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#404040"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- URL TextBox Style (Rounded) -->
-<Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
+        <Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="#3c3c3c"/>
             <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -106,15 +134,15 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" 
-                                CornerRadius="20" 
-                                Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border x:Name="border"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-                                          Focusable="false" 
-                                          HorizontalScrollBarVisibility="Hidden" 
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="false"
+                                          HorizontalScrollBarVisibility="Hidden"
                                           VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -130,31 +158,41 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/> <!-- Title Bar -->
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Custom Title Bar -->
+        <Grid Grid.Row="0" Background="#2d2d2d" MouseDown="TitleBar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="MinimizeButton" Content="—" Style="{StaticResource TitleBarButtonStyle}" Click="MinimizeButton_Click"/>
+                <Button Name="MaximizeButton" Content="☐" Style="{StaticResource TitleBarButtonStyle}" Click="MaximizeButton_Click"/>
+                <Button Name="CloseButton" Content="✕" Style="{StaticResource TitleBarButtonStyle}" Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
         <!-- Tab Bar (Dark Gray Background) -->
-        <Grid Grid.Row="0" Background="#252525" Height="40">
+        <Grid Grid.Row="1" Background="#252525" Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
-            <ScrollViewer Grid.Column="0" 
-                         HorizontalScrollBarVisibility="Auto" 
+
+            <ScrollViewer Grid.Column="0"
+                         HorizontalScrollBarVisibility="Auto"
                          VerticalScrollBarVisibility="Hidden"
                          Background="Transparent">
-                <StackPanel x:Name="TabPanel" 
-                           Orientation="Horizontal" 
+                <StackPanel x:Name="TabPanel"
+                           Orientation="Horizontal"
                            VerticalAlignment="Center"
                            Margin="10,0"/>
             </ScrollViewer>
-            
+
             <!-- New Tab Button (+) -->
-            <Button Grid.Column="1" 
-                   Content="+" 
+            <Button Grid.Column="1"
+                   Content="+"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="30" Height="30"
                    Margin="5"
@@ -164,7 +202,7 @@
         </Grid>
 
         <!-- Navigation Bar (Darker Gray) -->
-        <Grid Grid.Row="1" Background="#2d2d2d" Height="50">
+        <Grid Grid.Row="2" Background="#2d2d2d" Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -175,49 +213,49 @@
             </Grid.ColumnDefinitions>
 
             <!-- Back Button -->
-            <Button Grid.Column="0" 
-                   Content="←" 
+            <Button Grid.Column="0"
+                   Content="←"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="40" Height="35"
                    FontSize="16"
                    Click="GoBack_Click"
                    x:Name="BackButton"/>
-            
+
             <!-- Forward Button -->
-            <Button Grid.Column="1" 
-                   Content="→" 
+            <Button Grid.Column="1"
+                   Content="→"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="40" Height="35"
                    FontSize="16"
                    Click="GoForward_Click"
                    x:Name="ForwardButton"/>
-            
+
             <!-- Refresh Button -->
-            <Button Grid.Column="2" 
-                   Content="⟳" 
+            <Button Grid.Column="2"
+                   Content="⟳"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="40" Height="35"
                    FontSize="16"
                    Click="Refresh_Click"/>
 
             <!-- URL Bar (Rounded with Blue Focus) -->
-            <TextBox Grid.Column="3" 
+            <TextBox Grid.Column="3"
                     x:Name="UrlTextBox"
                     Style="{StaticResource UrlTextBoxStyle}"
                     Margin="10,7.5"
                     KeyDown="UrlTextBox_KeyDown"/>
 
             <!-- Home Button -->
-            <Button Grid.Column="4" 
-                   Content="🏠" 
+            <Button Grid.Column="4"
+                   Content="🏠"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="40" Height="35"
                    FontSize="14"
                    Click="Home_Click"/>
-            
+
             <!-- Menu Button -->
-            <Button Grid.Column="5" 
-                   Content="⋮" 
+            <Button Grid.Column="5"
+                   Content="⋮"
                    Style="{StaticResource ModernButtonStyle}"
                    Width="40" Height="35"
                    FontSize="16"
@@ -225,7 +263,7 @@
         </Grid>
 
         <!-- WebView Container (Main Content Area) -->
-        <Grid Grid.Row="2" x:Name="WebViewContainer" Background="#1e1e1e">
+        <Grid Grid.Row="3" x:Name="WebViewContainer" Background="#1e1e1e">
             <!-- WebView2 controls will be added here dynamically -->
         </Grid>
     </Grid>

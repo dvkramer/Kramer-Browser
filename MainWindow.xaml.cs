@@ -63,6 +63,7 @@ namespace WebView2Browser
                 webView.NavigationStarting += (s, e) => WebView_NavigationStarting(s, e, tab);
                 webView.NavigationCompleted += (s, e) => WebView_NavigationCompleted(s, e, tab);
                 webView.CoreWebView2.DocumentTitleChanged += (s, e) => WebView_DocumentTitleChanged(s, e, tab);
+                webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 
                 // Navigate to home
                 webView.CoreWebView2.Navigate(HOME_URL);
@@ -324,6 +325,37 @@ namespace WebView2Browser
                 NavigateToUrl(UrlTextBox.Text);
                 e.Handled = true;
             }
+        }
+
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
+        {
+            e.Handled = true;
+            Dispatcher.Invoke(() =>
+            {
+                CreateNewTab();
+                NavigateToUrl(e.Uri);
+            });
         }
 
         protected override void OnClosed(EventArgs e)
