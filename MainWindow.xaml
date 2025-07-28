@@ -7,8 +7,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="#1e1e1e"
-        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
-        TitlebarHeight="45">
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}">
 
     <Window.Resources>
         <!-- Modern Button Style -->
