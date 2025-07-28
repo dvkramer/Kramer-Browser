@@ -23,7 +23,7 @@ namespace WebView2Browser
             CreateNewTab();
         }
 
-        private async void CreateNewTab()
+        private async void CreateNewTab(string url = HOME_URL)
         {
             var tab = new BrowserTab();
             tabs.Add(tab);
@@ -67,7 +67,7 @@ namespace WebView2Browser
                 webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 
                 // Navigate to home
-                webView.CoreWebView2.Navigate(HOME_URL);
+                webView.CoreWebView2.Navigate(url);
             }
             catch (Exception ex)
             {
@@ -331,11 +331,7 @@ namespace WebView2Browser
         private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
         {
             e.Handled = true;
-            Dispatcher.Invoke(() =>
-            {
-                CreateNewTab();
-                NavigateToUrl(e.Uri);
-            });
+            Dispatcher.Invoke(() => CreateNewTab(e.Uri));
         }
 
         protected override void OnClosed(EventArgs e)
