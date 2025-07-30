@@ -1,0 +1,129 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#tabs {
+    display: flex;
+    background-color: #252525;
+    padding: 5px 10px 0 10px;
+    border-bottom: 1px solid #444;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #2d2d2d;
+    margin-right: 1px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    max-width: 200px;
+    position: relative;
+}
+
+.tab.active {
+    background-color: #0078d4;
+}
+
+.tab:hover {
+    background-color: #404040;
+}
+
+.tab-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.close-tab {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+#new-tab-button {
+    background-color: #2d2d2d;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    background-color: #2d2d2d;
+    padding: 5px;
+    height: 40px;
+}
+
+#nav button {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#nav button:hover {
+    background-color: #404040;
+}
+
+#url {
+    flex: 1;
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 8px 10px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    border-radius: 20px;
+    margin: 0 10px;
+}
+
+#url:focus {
+    outline: none;
+    border-color: #0078d4;
+}
+
+#views {
+    flex: 1;
+    position: relative;
+}
+
+webview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+}
+
+webview.hidden {
+    visibility: hidden;
+}
