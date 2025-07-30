@@ -1,44 +1,15 @@
 {
   "name": "kramer-browser",
   "version": "1.0.0",
-  "description": "A lightweight browser built with Electron",
+  "description": "Kramer Browser is a lightweight browser built on Electron.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "electron-builder",
-    "dist": "electron-builder --publish=never"
+    "start": "electron ."
   },
-  "keywords": ["browser", "electron", "webview"],
-  "author": "Daniel Vincent Kramer",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "electron": "^27.0.0",
-    "electron-builder": "^24.6.4"
-  },
-  "build": {
-    "appId": "com.danielkramer.kramerbrowser",
-    "productName": "Kramer Browser",
-    "copyright": "Copyright © 2025 Daniel Vincent Kramer",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "**/*",
-      "!dist/**/*",
-      "!node_modules/**/*"
-    ],
-    "win": {
-      "target": "nsis",
-      "icon": "assets/icon.png"
-    },
-    "mac": {
-      "target": "dmg",
-      "icon": "assets/icon.png"
-    },
-    "linux": {
-      "target": "AppImage",
-      "icon": "assets/icon.png"
-    }
+    "electron": "^28.0.0"
   }
 }
