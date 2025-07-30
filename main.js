@@ -15,6 +15,7 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false,
       webSecurity: true,
+      webviewTag: true,
       preload: path.join(__dirname, 'preload.js')
     },
     titleBarStyle: 'default',
